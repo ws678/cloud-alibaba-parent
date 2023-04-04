@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.186.128:8848
+      config:
+        server-addr: 192.168.186.128:8848
+        # 配置内容文件的数据格式，默认值：properties
+        file-extension: yaml
+        #修改分组
+        #group: TEST_GROUP

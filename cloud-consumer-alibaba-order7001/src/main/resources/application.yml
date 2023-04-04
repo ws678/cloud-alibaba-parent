@@ -1,0 +1,25 @@
+# 端口
+server:
+  port: 7001
+spring:
+  application:
+    name: nacos-order-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.186.128:8848
+    sentinel:
+      transport:
+        # 配置dashboard地址
+        dashboard: 192.168.186.128:8998
+        # 应用与控制台交互的端口 默认8719
+        port: 8719
+# 激活feign对sentinel的支持
+feign:
+  sentinel:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

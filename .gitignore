@@ -1,0 +1,9 @@
+# Project exclude paths
+/cloud-config-nacos-client8901/target/
+/cloud-consumer-alibaba-order7001/target/
+/cloud-provider-alibaba-payment9001/target/
+/cloud-provider-alibaba-payment9002/target/
+/cloud-seata-account9013/target/
+/cloud-seata-order9011/target/
+/cloud-seata-storage9012/target/
+/cloud-sentinel-service8401/target/

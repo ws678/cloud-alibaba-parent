@@ -1,0 +1,57 @@
+# 端口
+server:
+  port: 9013
+spring:
+  application:
+    name: seata-account-service
+  #   数据源基本配置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata-account?allowPublicKeyRetrieval=true&useSSL=true
+    username: root
+    password: 678678
+feign.hystrix.enabled: true
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        sleepWindowInMilliseconds: 30000
+        requestVolumeThreshold: 10
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 100000
+mybatis:
+  mapperLocations: classpath:mapper/*Mapper.xml
+# seata
+seata:
+  enabled: true
+  application-id: applicationName
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  config:
+    type: nacos
+    nacos:
+      namespace:
+      serverAddr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      userName: "nacos"
+      password: "nacos"
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      namespace:
+      userName: "nacos"
+      password: "nacos"
+  service:
+    vgroup-mapping: my_test_tx_group
