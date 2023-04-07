@@ -11,7 +11,7 @@
         <result property="residue" jdbcType="INTEGER" column="residue" />
     </resultMap>
 
-    <select id="decrease" >
+    <select id="decrease">
         UPDATE storage
         set used = used + #{count},
             residue = residue - #{count}

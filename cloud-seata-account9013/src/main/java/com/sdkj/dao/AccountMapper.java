@@ -1,6 +1,7 @@
 package com.sdkj.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 
@@ -11,5 +12,5 @@ import java.math.BigDecimal;
  */
 @Mapper
 public interface AccountMapper {
-    Integer decrease(Long userId, BigDecimal money);
+    Integer decrease(@Param("userId") Long userId, @Param("money") BigDecimal money);
 }

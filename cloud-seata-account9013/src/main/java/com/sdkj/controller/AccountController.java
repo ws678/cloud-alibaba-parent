@@ -21,11 +21,7 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping(value = "/account/decrease")
-    public CommonResult decrease(@RequestParam("userId") Long userId, @RequestParam("money")BigDecimal money){
-        Integer count = accountService.decrease(userId,money);
-        if (count>0)
-            return new CommonResult<>(200,"余额扣减成功，影响条数"+count.toString());
-        else
-            throw new RuntimeException("对应账户余额不足！");
+    public void decrease(@RequestParam("userId") Long userId, @RequestParam("money") BigDecimal money) {
+        accountService.decrease(userId, money);
     }
 }

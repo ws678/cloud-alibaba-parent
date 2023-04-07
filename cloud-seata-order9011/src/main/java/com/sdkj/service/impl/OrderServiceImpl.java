@@ -6,8 +6,10 @@ import com.sdkj.service.AccountService;
 import com.sdkj.service.OrderService;
 import com.sdkj.service.StorageService;
 import io.seata.spring.annotation.GlobalTransactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author wangshuo
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
  * Please add a comment
  */
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
@@ -24,20 +27,26 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private AccountService accountService;
 
-    //全局事务控制
-    @GlobalTransactional(name = "my_test_tx_group",rollbackFor = Exception.class)
+    @Transactional
+    @GlobalTransactional//全局事务控制
     @Override
     public void create(Order order) {
-        System.out.println("create start");
-        //减库存
-        storageService.decrease(order.getProductId(),order.getCount());
-        System.out.println("storage decrease success");
-        //扣减余额
-        accountService.decrease(order.getUserId(), order.getMoney());
-        System.out.println("order decrease success");
-        //修改订单状态
-        orderDao.update(order.getId(), order.getUserId(), 0);
-        //end
-        System.out.println("end");
+        if (null != order.getCount() & null != order.getMoney() & null != order.getUserId() & null != order.getProductId()) {
+            System.out.println("create start");
+            //创建进行中的订单
+            orderDao.insert(order);
+            //减库存
+            storageService.decrease(order.getProductId(), order.getCount());
+            System.out.println("storage decrease success");
+            //扣减余额
+            accountService.decrease(order.getUserId(), order.getMoney());
+            System.out.println("order decrease success");
+            //修改订单状态
+            orderDao.update(order.getId(), order.getUserId());
+            //end
+            System.out.println("end");
+        } else {
+            throw new RuntimeException("请传入必须的参数");
+        }
     }
 }

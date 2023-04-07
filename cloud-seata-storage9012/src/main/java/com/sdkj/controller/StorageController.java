@@ -20,12 +20,8 @@ public class StorageController {
     private StorageService storageService;
 
     @PostMapping(value = "/storage/decrease")
-    public CommonResult decrease(@RequestParam("productId") Long productId ,@RequestParam("count") Integer count){
+    public void decrease(@RequestParam("productId") Long productId ,@RequestParam("count") Integer count){
 
-        Integer decrease = storageService.decrease(productId, count);
-        if (decrease>0)
-            return new CommonResult<>(200,"修改成功，影响条数="+decrease.toString());
-        else
-            throw new RuntimeException("商品对应库存不足");
+        storageService.decrease(productId, count);
     }
 }

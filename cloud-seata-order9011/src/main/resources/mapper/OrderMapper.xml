@@ -14,12 +14,12 @@
 
     <insert id="insert" parameterType="com.sdkj.entity.Order" useGeneratedKeys="true"
             keyProperty="id">
-        INSERT INTO `order` (id, user_id, product_id, count, money, status )
-        values(null, #{userId}, #{productId}, #{count}, #{money}, 0)
+        INSERT INTO `order` (user_id, product_id, count, money, status )
+        values(#{userId}, #{productId}, #{count}, #{money}, 0)
     </insert>
 
     <select id="update" >
         UPDATE `order`  set status = 1
-        WHERE id = #{id} and status = #{status} and user_id = #{userId}
+        WHERE id = #{id} and user_id = #{userId}
     </select>
 </mapper>

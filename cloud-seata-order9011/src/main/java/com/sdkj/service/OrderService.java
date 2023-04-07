@@ -9,5 +9,5 @@ import com.sdkj.entity.Order;
  */
 public interface OrderService {
 
-    public void create(Order order);
+    void create(Order order);
 }

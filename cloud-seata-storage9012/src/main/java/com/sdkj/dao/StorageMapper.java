@@ -1,6 +1,7 @@
 package com.sdkj.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @Author wangshuo
@@ -9,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface StorageMapper {
-    public Integer decrease(Long productId, Integer count);
+    Integer decrease(@Param("productId") Long productId, @Param("count") Integer count);
 }

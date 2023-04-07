@@ -11,7 +11,7 @@ spring:
         server-addr: 127.0.0.1:8848
     alibaba:
       seata:
-        tx-service-group: my_test_tx_group
+        tx-service-group: my_order_tx_group
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/seata-order?allowPublicKeyRetrieval=true&useSSL=true
@@ -21,27 +21,3 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
 mybatis:
   mapperLocations: classpath:mapper/*Mapper.xml
-# seata
-seata:
-  enabled: true
-  application-id: applicationName
-  tx-service-group: my_test_tx_group
-  enable-auto-data-source-proxy: true
-  config:
-    type: nacos
-    nacos:
-      namespace:
-      serverAddr: 127.0.0.1:8848
-      group: SEATA_GROUP
-      userName: "nacos"
-      password: "nacos"
-  registry:
-    type: nacos
-    nacos:
-      application: seata-server
-      server-addr: 127.0.0.1:8848
-      namespace:
-      userName: "nacos"
-      password: "nacos"
-  service:
-    vgroup-mapping: my_test_tx_group

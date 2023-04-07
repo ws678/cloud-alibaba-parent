@@ -21,5 +21,4 @@ public class Order {
     private Integer count;
     private BigDecimal money;
     private Integer status;
-
 }
