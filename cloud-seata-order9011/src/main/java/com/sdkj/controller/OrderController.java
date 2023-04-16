@@ -19,6 +19,8 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    // 调用示例
+    // http://localhost:9011/order/create?userId=1&productId=1&count=10&money=100
     @GetMapping("/order/create")
     public CommonResult create(Order order) {
         orderService.create(order);
